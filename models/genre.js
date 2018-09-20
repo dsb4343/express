@@ -3,16 +3,16 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 //table
-var GenreSchema = new Schema(
+var GenreSchema = new Schema (
 	{
-		name: { type: String, required: true, min:3, max:100 },
+		name: [{ type: String, required: true, min: 3, max: 100 }],
 	}
-};
+);
 
 // Virtual
 GenreSchema
 .virtual('url')
-.get(function) () {
+.get(function () {
 	return 'catalog/Genre/' + this._id;
 });
 
