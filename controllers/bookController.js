@@ -175,7 +175,7 @@ exports.book_delete_get = function(req, res, next) {
             Book.findById(req.params.id).exec(callback)
         },
         books_bookinstances: function(callback) {
-          Book.find({ 'book': req.params.id }).exec(callback)
+          BookInstance.find({ 'book': req.params.id }).exec(callback)
         },
     }, function(err, results) {
         if (err) { return next(err); }
