@@ -1,6 +1,5 @@
-var moment = require('moment');
-
 var mongoose = require('mongoose');
+var moment = require('moment'); // For date handling.
 
 var Schema = mongoose.Schema;
 

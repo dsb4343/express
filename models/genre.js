@@ -2,18 +2,15 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-//table
-var GenreSchema = new Schema (
-	{
-		name: { type: String, required: true, min: 3, max: 100 },
-	}
-);
+var GenreSchema = new Schema ({
+		name: { type: String, required: true, min: 3, max: 100 }	
+});
 
-// Virtual
+// Virtual for this genre instance URL.
 GenreSchema
 .virtual('url')
 .get(function () {
-	return '/catalog/Genre/' + this._id;
+	return '/catalog/genre/' + this._id;
 });
 
 //Export model

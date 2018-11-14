@@ -1,12 +1,9 @@
-const { body,validationResult } = require('express-validator/check');
-
-const { sanitizeBody } = require('express-validator/filter');
-
+var Genre = require('../models/genre');
 var Book = require('../models/book');
-
 var async = require('async');
 
-var Genre = require('../models/genre');
+const { body,validationResult } = require('express-validator/check');
+const { sanitizeBody } = require('express-validator/filter');
 
 // Display list of all Genres.
 exports.genre_list = function(req, res, next) {
@@ -131,10 +128,10 @@ exports.genre_delete_post = function(req, res, next) {
 
     async.parallel({
         genre: function(callback) {
-          Genre.findById(req.body.genreid).exec(callback)
+          Genre.findById(req.params.id).exec(callback);
         },
         genre_books: function(callback) {
-          Book.find({ 'genre': req.body.genreid }).exec(callback)
+          Book.find({ 'genre': req.params.id }).exec(callback);
         },
     }, function(err, results) {
         if (err) { return next(err); }
@@ -146,7 +143,7 @@ exports.genre_delete_post = function(req, res, next) {
         }
         else {
             // Genre has no books. Delete object and redirect to the list of genres.
-            Genre.findByIdAndRemove(req.body.genreid, function deleteGenre(err) {
+            Genre.findByIdAndRemove(req.body.id, function deleteGenre(err) {
                 if (err) { return next(err); }
                 // Success - go to genre list
                 res.redirect('/catalog/genres')
