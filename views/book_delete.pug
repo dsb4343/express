@@ -5,13 +5,13 @@ block content
   h1 #{title}: #{book.name}
   
   p #[strong Author:]
-    a(href=book.author.url) #{book.author.name}
+    a(href=book.author.url)  #{book.author.name}
   P #[strong Summary:] #{book.summary}
   P #[strong ISBN:] #{book.isbn}
   P #[strong Genre:]
     each val in book.genre
-      a(href=val.url) #val.name}
-      |,
+      a(href=val.url)  #{val.name}
+        |,
             
   hr
     

@@ -136,17 +136,17 @@ exports.bookinstance_update_get = function(req, res, next) {
         books: function(callback) {
             Book.find(callback)
         },
-
-        }, function(err, results) {
-            if (err) { return next(err); }
-            if (results.bookinstance==null) { // No results.
-                var err = new Error('Book copy not found');
-                err.status = 404;
-                return next(err);
-            }
-            // Success.
-            res.render('bookinstance_form', { title: 'Update  BookInstance', book_list : results.books, selected_book : results.bookinstance.book._id, bookinstance:results.bookinstance });
-        });
+    },  
+    function(err, results) {
+        if (err) { return next(err); }
+        if (results.bookinstance==null) { // No results.
+            var err = new Error('Book copy not found');
+            err.status = 404;
+            return next(err);
+        }
+        // Success.
+        res.render('bookinstance_form', { title: 'Update  BookInstance', book_list : results.books, selected_book : results.bookinstance.book._id, bookinstance:results.bookinstance });
+    });
 
 };
 
@@ -195,7 +195,7 @@ exports.bookinstance_update_post = [
                 if (err) { return next(err); }
                    // Successful - redirect to detail page.
                    res.redirect(thebookinstance.url);
-                });
+            });
         }
     }
 ];
