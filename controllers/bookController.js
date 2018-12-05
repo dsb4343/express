@@ -186,7 +186,7 @@ exports.book_delete_get = function(req, res, next) {
 
 // Handle Book delete on POST.
 exports.book_delete_post = function(req, res, next) {
-    console.log('\n\n\n' + res.bookid + '\n\n\n'); 
+     
     async.parallel({
         book: function(callback) {
           Book.findById(req.params.id).exec(callback);
@@ -205,11 +205,10 @@ exports.book_delete_post = function(req, res, next) {
         else {
             // Book has no Instances. Delete object and redirect to the list of books.
             
-            Book.findByIdAndRemove(res.bookid, function deleteBook(err) {
+            Book.findByIdAndRemove(results.book.id, function deleteBook(err) {
                 if (err) { return next(err); }
                 // Success - go to book list
-                console.log('you got to the error thing');
-                console.log(err);
+               
                 res.redirect('/catalog/books');
             });
         }
